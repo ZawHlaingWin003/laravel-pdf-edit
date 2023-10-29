@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\SignaturePadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PdfController::class,'index'])->name('index');
+Route::post('/preview', [PdfController::class, 'preview'])->name('preview');
+Route::post('/download', [PdfController::class, 'download'])->name('download');
 
-Route::get('result', [PdfController::class, 'index']);
 
 Route::get('signaturepad', [SignaturePadController::class, 'index']);
 Route::post('signaturepad', [SignaturePadController::class, 'upload'])->name('signaturepad.upload');
